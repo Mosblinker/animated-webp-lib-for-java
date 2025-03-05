@@ -1,7 +1,5 @@
 package com.tianscar.webp;
 
-import java.util.ArrayList;
-import java.util.List;
 import jnr.ffi.LibraryLoader;
 import jnr.ffi.Pointer;
 import jnr.ffi.annotations.In;
@@ -10,75 +8,6 @@ import jnr.ffi.byref.IntByReference;
 import jnr.ffi.byref.PointerByReference;
 
 final class JNRFFI {
-    /**
-     * This is the default name of the libwebp library.
-     */
-    public static final String DEFAULT_WEBP_LIBRARY_NAME = "libwebp";
-    /**
-     * This is the name of the libwebp library.
-     */
-    private static String libraryName = DEFAULT_WEBP_LIBRARY_NAME;
-    /**
-     * This is a list of additional search directories to use to search for the 
-     * libwebp library.
-     */
-    private static final List<String> searchPaths = new ArrayList<>();
-    /**
-     * This returns the name of the library used to handle WebP images. This is 
-     * set to "{@value DEFAULT_WEBP_LIBRARY_NAME}" by default, but this is here 
-     * for instances where the libwebp library may be using a different name.
-     * @return The name of the libwebp library.
-     * @see #setWebPLibraryName(java.lang.String) 
-     * @see #DEFAULT_WEBP_LIBRARY_NAME
-     * @see LibraryLoader#load(java.lang.String) 
-     */
-    public static String getWebPLibraryName(){
-        return libraryName;
-    }
-    /**
-     * This sets the name to use to access the library used to handle WebP 
-     * images. This is set to "{@value DEFAULT_WEBP_LIBRARY_NAME}" by default, 
-     * but this is here in case the libwebp library can be found using a 
-     * different name.
-     * @param name The name of the libwebp library, or null to reset it to the 
-     * default name.
-     * @see #getWebPLibraryName() 
-     * @see #DEFAULT_WEBP_LIBRARY_NAME
-     * @see LibraryLoader#load(java.lang.String) 
-     */
-    public static void setWebPLibraryName(String name){
-            // If the name is null, reset the name to default
-        libraryName = (name!=null)?name:DEFAULT_WEBP_LIBRARY_NAME;
-    }
-    /**
-     * This returns a list containing the additional directories to search in 
-     * when searching for the library used for WebP images. This list can be 
-     * edited to add, remove, or change the additional directories.
-     * @return A list containing additional directories to search for the 
-     * library in.
-     * @see #addSearchDirectoy(java.lang.String) 
-     * @see LibraryLoader#search(java.lang.String) 
-     */
-    public static List<String> getAdditionalSearchDirectories(){
-        return searchPaths;
-    }
-    /**
-     * This adds the given path to the list of additional directories to search 
-     * when searching for the library used for WebP images. This will not add a 
-     * path that has already been added to the additional search directories.
-     * @param path The directory to search (cannot be null).
-     * @throws NullPointerException If the given path is null.
-     * @see #getAdditionalSearchDirectories() 
-     * @see LibraryLoader#search(java.lang.String) 
-     */
-    public static void addSearchDirectoy(String path){
-            // If the given path is null
-        if (path == null)
-            throw new NullPointerException();
-            // If the search paths doesn't contain the given path
-        if (!getAdditionalSearchDirectories().contains(path))
-            getAdditionalSearchDirectories().add(path);
-    }
 
     private JNRFFI() {
         throw new UnsupportedOperationException();
@@ -91,11 +20,11 @@ final class JNRFFI {
             // Get the LibraryLoader to use to load libwebp
         LibraryLoader<WebP> libwebpLoader = LibraryLoader.create(WebP.class);
             // Go through the additional search paths
-        for (String path : getAdditionalSearchDirectories())
+        for (String path : WebPFactory.getAdditionalSearchDirectories())
                 // Add the search path.
             libwebpLoader.search(path);
             // Load the libwebp library
-        return libwebpLoader.load(getWebPLibraryName());
+        return libwebpLoader.load(WebPFactory.getWebPLibraryName());
     }
 
     protected interface WebP {
