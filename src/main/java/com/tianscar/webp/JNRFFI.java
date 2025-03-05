@@ -12,10 +12,14 @@ final class JNRFFI {
     private JNRFFI() {
         throw new UnsupportedOperationException();
     }
+    
+    private static WebP loadLibrary(){
+        return LibraryLoader.create(WebP.class).load("webp");
+    }
 
     protected interface WebP {
 
-        WebP INSTANCE = LibraryLoader.create(WebP.class).load("webp");
+        WebP INSTANCE = loadLibrary();
 
         void WebPFree(@In Pointer ptr);
 
