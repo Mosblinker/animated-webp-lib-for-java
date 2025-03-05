@@ -42,7 +42,7 @@ public final class WebPFactory {
      * @return The name of the libwebp library.
      * @see #setWebPLibraryName(java.lang.String) 
      * @see #DEFAULT_WEBP_LIBRARY_NAME
-     * @see LibraryLoader#load(java.lang.String) 
+     * @see jnr.ffi.LibraryLoader#load(java.lang.String) 
      */
     public static String getWebPLibraryName(){
         return libraryName;
@@ -56,7 +56,7 @@ public final class WebPFactory {
      * default name.
      * @see #getWebPLibraryName() 
      * @see #DEFAULT_WEBP_LIBRARY_NAME
-     * @see LibraryLoader#load(java.lang.String) 
+     * @see jnr.ffi.LibraryLoader#load(java.lang.String) 
      */
     public static void setWebPLibraryName(String name){
             // If the name is null, reset the name to default
@@ -69,7 +69,7 @@ public final class WebPFactory {
      * @return A list containing additional directories to search for the 
      * library in.
      * @see #addSearchDirectoy(java.lang.String) 
-     * @see LibraryLoader#search(java.lang.String) 
+     * @see jnr.ffi.LibraryLoader#search(java.lang.String) 
      */
     public static List<String> getAdditionalSearchDirectories(){
         return searchPaths;
@@ -81,7 +81,7 @@ public final class WebPFactory {
      * @param path The directory to search (cannot be null).
      * @throws NullPointerException If the given path is null.
      * @see #getAdditionalSearchDirectories() 
-     * @see LibraryLoader#search(java.lang.String) 
+     * @see jnr.ffi.LibraryLoader#search(java.lang.String) 
      */
     public static void addSearchDirectoy(String path){
             // If the given path is null
