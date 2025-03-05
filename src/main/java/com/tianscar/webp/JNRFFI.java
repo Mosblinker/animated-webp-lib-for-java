@@ -8,13 +8,49 @@ import jnr.ffi.byref.IntByReference;
 import jnr.ffi.byref.PointerByReference;
 
 final class JNRFFI {
+    /**
+     * This is the default name of the libwebp library.
+     */
+    public static final String DEFAULT_WEBP_LIBRARY_NAME = "libwebp";
+    /**
+     * This is the name of the libwebp library.
+     */
+    private static String libraryName = DEFAULT_WEBP_LIBRARY_NAME;
+    /**
+     * This returns the name of the library used to handle WebP images. This is 
+     * set to "{@value DEFAULT_WEBP_LIBRARY_NAME}" by default, but this is here 
+     * for instances where the libwebp library may be using a different name.
+     * @return The name of the libwebp library.
+     * @see #setWebPLibraryName(java.lang.String) 
+     * @see #DEFAULT_WEBP_LIBRARY_NAME
+     */
+    public static String getWebPLibraryName(){
+        return libraryName;
+    }
+    /**
+     * This sets the name to use to access the library used to handle WebP 
+     * images. This is set to "{@value DEFAULT_WEBP_LIBRARY_NAME}" by default, 
+     * but this is here in case the libwebp library can be found using a 
+     * different name.
+     * @param name The name of the libwebp library, or null to reset it to the 
+     * default name.
+     * @see #getWebPLibraryName() 
+     * @see #DEFAULT_WEBP_LIBRARY_NAME
+     */
+    public static void setWebPLibraryName(String name){
+            // If the name is null, reset the name to default
+        libraryName = (name!=null)?name:DEFAULT_WEBP_LIBRARY_NAME;
+    }
 
     private JNRFFI() {
         throw new UnsupportedOperationException();
     }
-    
+    /**
+     * This loads and returns an instance of the WebP class.
+     * @return An instance of the WebP class.
+     */
     private static WebP loadLibrary(){
-        return LibraryLoader.create(WebP.class).load("libwebp");
+        return LibraryLoader.create(WebP.class).load(getWebPLibraryName());
     }
 
     protected interface WebP {
