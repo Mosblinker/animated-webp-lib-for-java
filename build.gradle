@@ -9,8 +9,8 @@ ext {
     libraryGroupName = 'com.tianscar.webp'
     libraryVendorName = 'Tianscar'
 
-    libraryVersionCode = 1
-    libraryVersionName = '1.0.0'
+    libraryVersionCode = 2
+    libraryVersionName = '1.1.0'
 
     librarySourceCompatibility = JavaVersion.VERSION_1_8
     libraryTargetCompatibility = JavaVersion.VERSION_1_8
@@ -28,7 +28,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.jnr:jnr-ffi:2.2.13'
+    implementation 'com.github.jnr:jnr-ffi:2.2.17'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
