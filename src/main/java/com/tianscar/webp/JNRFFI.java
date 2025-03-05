@@ -14,7 +14,7 @@ final class JNRFFI {
     }
     
     private static WebP loadLibrary(){
-        return LibraryLoader.create(WebP.class).load("webp");
+        return LibraryLoader.create(WebP.class).load("libwebp");
     }
 
     protected interface WebP {
