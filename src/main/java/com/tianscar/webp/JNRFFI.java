@@ -17,6 +17,7 @@ final class JNRFFI {
      * @return An instance of the WebP class.
      */
     private static WebP loadLibrary(){
+        com.luciad.imageio.webp.WebP.loadNativeLibrary();
             // Get the LibraryLoader to use to load libwebp
         LibraryLoader<WebP> libwebpLoader = LibraryLoader.create(WebP.class);
             // Go through the additional search paths
