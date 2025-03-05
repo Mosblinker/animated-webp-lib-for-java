@@ -9,8 +9,8 @@ ext {
     libraryGroupName = 'com.tianscar.webp'
     libraryVendorName = 'Tianscar'
 
-    libraryVersionCode = 1
-    libraryVersionName = '1.0.0'
+    libraryVersionCode = 2
+    libraryVersionName = '1.1.0'
 
     librarySourceCompatibility = JavaVersion.VERSION_1_8
     libraryTargetCompatibility = JavaVersion.VERSION_1_8
